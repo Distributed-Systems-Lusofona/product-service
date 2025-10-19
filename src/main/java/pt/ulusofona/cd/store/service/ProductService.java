@@ -61,6 +61,7 @@ public class ProductService {
         product.setPrice(productDetails.getPrice());
         product.setStock(productDetails.getStock());
         product.setCurrency(productDetails.getCurrency());
+        product.setDiscontinued(productDetails.isDiscontinued());
 
         return productRepository.save(product);
     }
@@ -69,5 +70,10 @@ public class ProductService {
     public void deleteProduct(UUID id) {
         Product product = getProductById(id);
         productRepository.delete(product);
+    }
+
+    public int setProductsInactiveBySupplierId(String id){
+        UUID supplierUuid = UUID.fromString(id);
+        return productRepository.setProductsInactiveBySupplierId(supplierUuid);
     }
 }
