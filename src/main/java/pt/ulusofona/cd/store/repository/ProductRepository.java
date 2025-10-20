@@ -23,6 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Product p SET p.isDiscontinued = false WHERE p.supplierId = :supplierId")
+    @Query("UPDATE Product p SET p.isDiscontinued = true WHERE p.supplierId = :supplierId")
     int setProductsInactiveBySupplierId(@Param("supplierId") UUID supplierId);
 }
