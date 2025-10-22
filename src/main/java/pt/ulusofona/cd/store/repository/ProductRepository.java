@@ -1,7 +1,12 @@
 package pt.ulusofona.cd.store.repository;
 
+
+import feign.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pt.ulusofona.cd.store.model.Product;
 
 import java.math.BigDecimal;
@@ -15,4 +20,9 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     List<Product> findByNameContainingIgnoreCase(String name);
     List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
     List<Product> findBySupplierId(UUID supplierId);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Product p SET p.isDiscontinued = true WHERE p.supplierId = :supplierId")
+    int setProductsInactiveBySupplierId(@Param("supplierId") UUID supplierId);
 }
