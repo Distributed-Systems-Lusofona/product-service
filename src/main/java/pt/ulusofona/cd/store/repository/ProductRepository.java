@@ -21,6 +21,8 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
     List<Product> findBySupplierId(UUID supplierId);
 
+    Long countBySupplierIdAndIsDiscontinued(UUID supplierId, Boolean isDiscontinued);
+
     @Transactional
     @Modifying
     @Query("UPDATE Product p SET p.isDiscontinued = true WHERE p.supplierId = :supplierId")
