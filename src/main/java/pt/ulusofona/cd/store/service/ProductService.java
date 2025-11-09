@@ -76,4 +76,9 @@ public class ProductService {
         UUID supplierUuid = UUID.fromString(id);
         return productRepository.setProductsInactiveBySupplierId(supplierUuid);
     }
+
+    @Transactional()
+    public long countProductsBySupplierAndDiscontinued(UUID supplierId, boolean isDiscontinued) {
+        return productRepository.countBySupplierIdAndIsDiscontinued(supplierId, isDiscontinued);
+    }
 }

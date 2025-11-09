@@ -25,10 +25,14 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
+
+  grpc:
+    server:
+      port: 9090
+
 supplier:
   events:
     supplier-deactivated-events: supplier-deactivated-events
-
 
 feign:
   client:
